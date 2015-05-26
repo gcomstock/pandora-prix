@@ -22,6 +22,9 @@ class RacingWebSocket(tornado.websocket.WebSocketHandler):
     def on_close(self):
         print("WebSocket closed")
 
+    def check_origin(self, origin):
+        return True 
+
 def to_JSON(packet):
     return json.dumps(packet, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
