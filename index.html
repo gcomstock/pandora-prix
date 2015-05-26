@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Pandora prix UI</title>
+
+    <style type="text/css">
+
+@font-face {
+    font-family: 'ethnocentricitalic';
+    src: url('ethnocentric_rg_it-webfont.eot');
+    src: url('ethnocentric_rg_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('ethnocentric_rg_it-webfont.woff2') format('woff2'),
+         url('ethnocentric_rg_it-webfont.woff') format('woff'),
+         url('ethnocentric_rg_it-webfont.ttf') format('truetype'),
+         url('ethnocentric_rg_it-webfont.svg#ethnocentricitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+      body {
+        background-color: #666;
+      }
+
+      .rotTest {
+        transform:rotate(10deg);
+        width: 200px;
+        height: 100px;
+        background-color: #999;
+      }
+
+      .rotTest2 {
+        -webkit-transform:rotate(-10deg);
+        width: 200px;
+        height: 100px;
+        background-color: #ff0;
+
+          -webkit-box-shadow: 5px 5px 20px 0 #f00;
+        box-shadow: 5px 5px 20px 0 #f00;
+
+      }
+
+
+      h1 {
+        font-family: 'ethnocentricitalic';
+        font-size: 5rem;
+        -webkit-text-stroke: 0.005em #bada55;
+        color: white;
+        text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      }
+
+      h2 {
+        font-family: 'ethnocentricitalic';
+        font-size: 10rem;
+        -webkit-text-stroke: 0.005em #bada55;
+        color: white;
+        text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+      }
+
+      .radiusGradient {
+
+        margin: 200px;
+        width: 200px;
+        height: 100px;
+
+        border-radius: 50%;
+background: #1e5799; /* Old browsers */
+background: -moz-linear-gradient(top,  #1e5799 0%, #2989d8 50%, #207cca 51%, #7db9e8 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1e5799), color-stop(50%,#2989d8), color-stop(51%,#207cca), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #1e5799 0%,#2989d8 50%,#207cca 51%,#7db9e8 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+
+      }
+
+      .skew {
+        -webkit-transform: skew(10deg, 10deg);
+        background-color: #999;
+        margin: 200px;
+        width: 200px;
+        height: 100px;
+      }
+
+    </style>
+
+
+    <script type="text/javascript">
+
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 13) {
+    toggleFullScreen();
+  }
+}, false);
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement &&    // alternative standard method
+      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+    }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }
+}
+
+    </script>
+
+  </head>
+  <body>
+
+    <h1>123</h1>
+    <h2>789</h2>
+
+    <div class="rotTest">transform</div>
+    <div class="rotTest2">-webkit-transform</div>
+
+    <div class="glow"></div>
+    <div class="radiusGradient">radiusGradient</div>
+
+    <div class="skew">skew</div>
+
+  </body>
+</html>
