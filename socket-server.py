@@ -61,7 +61,7 @@ app.listen(8080)
 
 def outgauge_init():
     while (running):
-        insim = pyinsim.insim('192.168.1.12', 29999, Admin='')
+        insim = pyinsim.insim('192.168.1.10', 29999, Admin='')
         insim.bind(pyinsim.EVT_ALL, all)
         outsim = pyinsim.outsim('0.0.0.0', 10000, outsim_packet, 2.0)
         outgauge = pyinsim.outgauge('0.0.0.0', 10001, outgauge_packet, 2.0)
