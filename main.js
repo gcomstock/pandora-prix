@@ -30,7 +30,23 @@ function toggleFullScreen() {
 }
 
 
+var inactiveColor = '#666';
+
+var colors = [
+  {
+    primary   : '#f00',
+    secondary : '#ff7800'
+  },
+  {
+    primary   : '#4498ff',
+    secondary : '#0084ff'
+  },
+];
+
+
+
 $(function() {
+
 
 //PLAYER 1 GAUGES
 
@@ -127,36 +143,10 @@ $(function() {
   });
 
 
-/*
-  setInterval(function(){
 
-    $('.bar .fill').css({
-      'background-color' : '#333'
-    });
-
-    if (speed > 50 ) {
-      speed = 1;
-    }
-
-    for (var i = 0; i < speed; i++) {
-
-      $('.bar'+i+' .fill').css({
-        'background-color' : '#f00'
-      });
-
-    };
-
-    $('h2').html(speed);
-
-    speed++;
-
-  }, 30);
-*/
 
 
 });
-
-
 
 function drawRadialGauge(stats) {
 
@@ -190,7 +180,6 @@ function drawRadialGauge(stats) {
   };
 
 }
-
 
 function drawLinearGauge(stats) {
 
@@ -254,7 +243,48 @@ function drawGearGauge(stats) {
 }
 
 
-//updateRpm(player<NUM>,value<NUM>);
+
+function updateRpm(player,value) {
+
+  var $el = $('.pRPM').eq(player);
+  var maxValue = $el.data('max');
+  var $bars = $el.find('.bar .fill');
+
+  $bars.css({
+    'backgroundColor': inactiveColor
+  });
+
+
+  var fullBars = Math.round( value / maxValue*$bars.length );
+
+  for (var i = 0; i < fullBars; i++) {
+    $bars.eq(i).css({
+      'backgroundColor': colors[player].primary
+    });
+  };
+
+  $el.children('.value').text(value);
+
+}
+
+
+//DUMMY UPDATER/SOCKET DATA
+setInterval(function(){
+
+  var rpm1 = Math.random()*9;
+      rpm1 = rpm1.toFixed(1);
+
+  var rpm2 = Math.random()*9;
+      rpm2 = rpm2.toFixed(1);
+
+
+
+
+  updateRpm(0,rpm1);
+  updateRpm(1,rpm2);
+
+}, 100);
+
 //updateSpeed(player<NUM>,value<NUM>);
 //updateTurbo(player<NUM>,value<NUM>);
 //updatePosition(player<NUM>,value<NUM>);

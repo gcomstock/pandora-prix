@@ -41,6 +41,10 @@ body {
   font-size: 10px;
 }
 
+body, html {
+  height: 100%;
+}
+
 .timer {
   margin: 0 auto;
   font-family: 'digital';
