@@ -6,20 +6,12 @@ import tornado.web
 import tornado.websocket
 from threading import Thread
 
-
-
 latestPacket = "";
 
 class RacingWebSocket(tornado.websocket.WebSocketHandler):
-    def open(self):
-        print("WebSocket opened")
-
     def on_message(self, message):
         global latestPacket
         self.write_message(latestPacket)
-
-    def on_close(self):
-        print("WebSocket closed")
 
     def check_origin(self, origin):
         return True 
@@ -34,7 +26,7 @@ def outgauge_packet(outgauge, packet):
 app = tornado.web.Application([(r'/racing', RacingWebSocket)])
 app.listen(8080)
 
-outgauge = pyinsim.outgauge('0.0.0.0', 10001, outgauge_packet, 30.0)
+outgauge = pyinsim.outgauge('0.0.0.0', 10001, outgauge_packet, 3000.0)
 
 def outgauge_init():
     pyinsim.run()
