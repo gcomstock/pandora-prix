@@ -14,7 +14,9 @@ function startWebSocket() {
 	}
 	
 	socket.onmessage = function(event) {
-		update(JSON.parse(event.data));
+		if (event.data) {
+			update(JSON.parse(event.data));
+		}
 	}
 
 	setInterval(function() {
@@ -110,12 +112,19 @@ function update(data) {
 	}
 	if (data['RPM']) {
 		// gauge packet
+		console.log(data);
+		var id = data['ID'][0];
 		var plid = data['PLID'];
 		var rpm = Math.floor(data.RPM / 100) / 10;
 		if (rpm == Math.floor(rpm)) {
-			rpm = rpm + ".0";
+			rpm = String(rpm) + ".0";
 		}
-		updateRpm(plid == 4 ? 0 : 1, rpm);
+		//console.log(id, data.Speed);
+		//console.log(data.Time);
+		updateRpm(id-1, rpm);
+		updateSpeed(id-1, Math.floor(data.Speed));
+		updateGear(id-1, data.Gear);
+
 
 		//console.log("plid: ", data.PLID, " rpm: ", data.RPM, " gear: ", data.Gear);
 	}
