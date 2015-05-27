@@ -269,6 +269,7 @@ function updateRpm(player,value) {
 
 
 //DUMMY UPDATER/SOCKET DATA
+/*
 setInterval(function(){
 
   var rpm1 = Math.random()*9;
@@ -284,6 +285,7 @@ setInterval(function(){
   updateRpm(1,rpm2);
 
 }, 100);
+*/
 
 //updateSpeed(player<NUM>,value<NUM>);
 //updateTurbo(player<NUM>,value<NUM>);
