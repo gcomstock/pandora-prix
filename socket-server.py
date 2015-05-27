@@ -15,7 +15,6 @@ class RacingWebSocket(tornado.websocket.WebSocketHandler):
         print("WebSocket opened")
 
     def on_message(self, message):
-        #self.write_message("Hello!")
         global latestPacket
         self.write_message(latestPacket)
 
@@ -31,7 +30,6 @@ def to_JSON(packet):
 def outgauge_packet(outgauge, packet):
     global latestPacket 
     latestPacket = to_JSON(packet)
-    print latestPacket
 
 app = tornado.web.Application([(r'/racing', RacingWebSocket)])
 app.listen(8080)
