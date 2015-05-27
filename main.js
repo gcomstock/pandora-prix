@@ -35,11 +35,11 @@ var inactiveColor = '#666';
 var colors = [
   {
     primary   : '#f00',
-    secondary : '#ff7800'
+    secondary : '#ffb400'
   },
   {
     primary   : '#4498ff',
-    secondary : '#0084ff'
+    secondary : '#ab48ff'
   },
 ];
 
@@ -242,10 +242,9 @@ function drawGearGauge(stats) {
 
 }
 
-
-
 function updateRpm(player,value) {
 
+  var value = value.toFixed(1);
   var $el = $('.pRPM').eq(player);
   var maxValue = $el.data('max');
   var $bars = $el.find('.bar .fill');
@@ -267,27 +266,73 @@ function updateRpm(player,value) {
 
 }
 
+function updateSpeed(player,value) {
+
+  var value = Math.round(value);
+  var $el = $('.pSpeed').eq(player);
+  var maxValue = $el.data('max');
+  var $bars = $el.find('.bar .fill');
+
+  $bars.css({
+    'backgroundColor': inactiveColor
+  });
+
+
+  var fullBars = Math.round( value / maxValue*$bars.length );
+
+  for (var i = 0; i < fullBars; i++) {
+    $bars.eq(i).css({
+      'backgroundColor': colors[player].primary
+    });
+  };
+
+  $el.children('.value').text(value);
+
+}
+
+function updateTurbo(player, value) {
+
+  var $el = $('.pTurbo').eq(player);
+  var maxValue = $el.data('max');
+  var $bars = $el.find('.bar .fill');
+
+  $bars.css({
+    'backgroundColor': inactiveColor
+  });
+
+  var fullBars = Math.round( value / maxValue*$bars.length );
+
+  for (var i = 0; i < fullBars; i++) {
+    $bars.eq(i).css({
+      'backgroundColor': colors[player].secondary
+    });
+  };
+
+}
 
 //DUMMY UPDATER/SOCKET DATA
 /*
 setInterval(function(){
 
   var rpm1 = Math.random()*9;
-      rpm1 = rpm1.toFixed(1);
-
   var rpm2 = Math.random()*9;
-      rpm2 = rpm2.toFixed(1);
+  var speed1 = Math.random()*250;
+  var speed2 = Math.random()*250;
+  var turbo = Math.random()*100;
 
 
 
-
+  updateSpeed(0,speed1);
+  updateSpeed(1,speed2);
   updateRpm(0,rpm1);
   updateRpm(1,rpm2);
+  updateTurbo(0,turbo);
+  updateTurbo(1,turbo);
 
 }, 100);
 */
 
-//updateSpeed(player<NUM>,value<NUM>);
+
 //updateTurbo(player<NUM>,value<NUM>);
 //updatePosition(player<NUM>,value<NUM>);
 //updateGear(player<NUM>,value<NUM>);

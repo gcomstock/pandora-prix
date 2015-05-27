@@ -204,7 +204,14 @@ SHARED GAUGE STYLES
   margin: 0;
   line-height: 1em;
   right: 1.7em;
+}
+
+#player1 .value {
   text-shadow: 0.03em 0.03em 0 #000, 0.06em 0.06em 0 #f00;
+}
+
+#player2 .value {
+  text-shadow: 0.03em 0.03em 0 #000, 0.06em 0.06em 0 #4498ff;
 }
 
 .pPosition {
