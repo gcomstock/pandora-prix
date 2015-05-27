@@ -343,7 +343,7 @@ function updateGear(player, value) {
     'backgroundColor': inactiveColor
   });
 
-  $el.find('.fill').eq(value).css({
+  $el.find('.fill').eq(value-1).css({
     'backgroundColor': colors[player].secondary
   });
 
