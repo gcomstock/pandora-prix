@@ -13,7 +13,8 @@ websockets = []
 insimQueue = Queue.Queue()
 outGaugePacket1 = ""
 outGaugePacket2 = ""
-outSimPacket = ""
+outSimPacket1 = ""
+outSimPacket2 = ""
 running = True
 
 class RacingWebSocket(tornado.websocket.WebSocketHandler):
@@ -21,7 +22,11 @@ class RacingWebSocket(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         self.write_message(outGaugePacket1)
         self.write_message(outGaugePacket2)
-        self.write_message(outSimPacket)
+        self.write_message(outSimPacket1)
+        self.write_message(outSimPacket2)
+
+        if (not insimQueue.empty()):
+            self.write_message(insimQueue.get(False))
 
     def check_origin(self, origin):
         return True 
@@ -33,20 +38,31 @@ def outgauge_packet(outgauge, packet):
     global outGaugePacket1
     global outGaugePacket2
     
-    if packet.PLID == 1:
+    if packet.ID[0] == 1:
         outGaugePacket1 = to_JSON(packet)
-    elif packet.PLID == 2:
+    elif packet.ID[0] == 2:
         outGaugePacket2 = to_JSON(packet)
 
 def outsim_packet(outsim, packet):
-    global outSimPacket
-    outSimPacket = to_JSON(packet)
+    global outSimPacket1
+    global outSimPacket2
+    
+    if packet.ID[0] == 1:
+        outSimPacket1 = to_JSON(packet)
+    elif packet.ID[0] == 2:
+        outSimPacket2 = to_JSON(packet)
+
+def all(insim, packet):
+    global insimQueue
+    insimQueue.put(to_JSON(packet))
 
 app = tornado.web.Application([(r'/racing', RacingWebSocket)])
 app.listen(8080)
 
 def outgauge_init():
     while (running):
+        insim = pyinsim.insim('192.168.1.12', 29999, Admin='')
+        insim.bind(pyinsim.EVT_ALL, all)
         outsim = pyinsim.outsim('0.0.0.0', 10000, outsim_packet, 2.0)
         outgauge = pyinsim.outgauge('0.0.0.0', 10001, outgauge_packet, 2.0)
         pyinsim.run()
@@ -67,6 +83,7 @@ def signal_handler(signal, frame):
         pyinsim.closeall()
         tornado.ioloop.IOLoop.instance().stop()
         sys.exit(0)
+
 signal.signal(signal.SIGINT, signal_handler)
 print("Press Control-C to exit")
 signal.pause()
