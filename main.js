@@ -142,8 +142,18 @@ $(function() {
     barSpacing : 0.25
   });
 
-
-
+  // PLAY SOUND CLIPS
+  /*
+  $("#crash-01")[0].play();
+  $("#crash-02")[0].play();
+  $("#finish-first-01")[0].play();
+  $("#finish-first-02")[0].play();
+  $("#first-lap-01")[0].play();
+  $("#first-lap-02")[0].play();
+  $("#start-race-01")[0].play();
+  $("#start-race-02")[0].play();
+  $("#top-speed-01")[0].play();
+  */
 
 
 });
