@@ -39,7 +39,6 @@ function update(data) {
 	}
 	if (data['RPM']) {
 		// gauge packet
-		console.log(data);
 		var id = data['ID'][0];
 		var plid = data['PLID'];
 		var rpm = Math.floor(data.RPM / 100) / 10;
@@ -48,9 +47,12 @@ function update(data) {
 		}
 		//console.log(id, data.Speed);
 		//console.log(data.Time);
+		if (id == 1) {
+			console.log(data.Gear+1);
+		}
 		updateRpm(id-1, rpm);
 		updateSpeed(id-1, Math.floor(data.Speed));
-		updateGear(id-1, data.Gear);
+		updateGear(id-1, data.Gear+1);
 
 
 		//console.log("plid: ", data.PLID, " rpm: ", data.RPM, " gear: ", data.Gear);
@@ -59,5 +61,5 @@ function update(data) {
 
 $(function() {
 	// startup code here
-	startWebSocket();
+	//startWebSocket();
 });

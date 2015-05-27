@@ -350,37 +350,6 @@ function updateGear(player, value) {
 }
 
 
-
-//DUMMY UPDATER/SOCKET DATA
-setInterval(function(){
-
-//random values to be replaced
-/*
-  var rpm1 = Math.random()*9;
-  var rpm2 = Math.random()*9;
-  var speed1 = Math.random()*250;
-  var speed2 = Math.random()*250;
-  var thrust = Math.random()*100;
-  var pos1 = Math.round(Math.random()*1+1);
-  var pos2 = Math.round(Math.random()*1+1);
-  var gear = Math.floor(Math.random()*6);
-*/
-
-  updateSpeed(0,speed1);
-  updateSpeed(1,speed2);
-  updateRpm(0,rpm1);
-  updateRpm(1,rpm2);
-  updateThrust(0,thrust);
-  updateThrust(1,thrust);
-  updatePosition(1,pos1);
-  updatePosition(0,pos2);
-  updateGear(0,gear);
-  updateGear(1,gear);
-
-}, 2000);
-
-
-
 //updateGear(player<NUM>,value<NUM>);
 //updateLap(player<NUM>,value<NUM>); //way to get lap length?
 //updatePhysics(player<NUM>,values<OBJECT?>);
