@@ -244,7 +244,6 @@ function drawGearGauge(stats) {
 
 function updateRpm(player,value) {
 
-  var value = value.toFixed(1);
   var $el = $('.pRPM').eq(player);
   var maxValue = $el.data('max');
   var $bars = $el.find('.bar .fill');
