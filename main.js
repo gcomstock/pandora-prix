@@ -39,7 +39,7 @@ var colors = [
   },
   {
     primary   : '#4498ff',
-    secondary : '#ab48ff'
+    secondary : '#8245ff'
   },
 ];
 
@@ -69,8 +69,8 @@ $(function() {
   });
 
   drawLinearGauge({
-    selector : '#p1turbo',
-    label : 'turbo',
+    selector : '#p1thrust',
+    label : 'thrust',
     gaugeLength : 17,
     barWidth : 1.03, //em
     barHeight : 2, //em
@@ -116,8 +116,8 @@ $(function() {
   });
 
   drawLinearGauge({
-    selector : '#p2turbo',
-    label : 'turbo',
+    selector : '#p2thrust',
+    label : 'thrust',
     gaugeLength : 17,
     barWidth : 1.03, //em
     barHeight : 2, //em
@@ -290,9 +290,9 @@ function updateSpeed(player,value) {
 
 }
 
-function updateTurbo(player, value) {
+function updateThrust(player, value) {
 
-  var $el = $('.pTurbo').eq(player);
+  var $el = $('.pThrust').eq(player);
   var maxValue = $el.data('max');
   var $bars = $el.find('.bar .fill');
 
@@ -310,31 +310,67 @@ function updateTurbo(player, value) {
 
 }
 
+function updatePosition(player, value) {
+
+  var $el = $('.pPosition').eq(player);
+
+  $el.children('.position').text(value);
+
+  if (value == 1) {
+    $el.children('.posLabel').text('st');
+  }
+  else {
+    $el.children('.posLabel').text('nd');
+  }
+
+}
+
+
+function updateGear(player, value) {
+
+  var $el = $('.pGear').eq(player);
+
+  $el.children('.position').text(value);
+
+  if (value == 1) {
+    $el.children('.posLabel').text('st');
+  }
+  else {
+    $el.children('.posLabel').text('nd');
+  }
+
+}
+
+
+
 //DUMMY UPDATER/SOCKET DATA
-/*
 setInterval(function(){
 
+//random values to be replaced
   var rpm1 = Math.random()*9;
   var rpm2 = Math.random()*9;
   var speed1 = Math.random()*250;
   var speed2 = Math.random()*250;
-  var turbo = Math.random()*100;
-
-
+  var thrust = Math.random()*100;
+  var pos1 = Math.round(Math.random()*1+1);
+  var pos2 = Math.round(Math.random()*1+1);
+  var gear = Math.floor(Math.random()*5+1);
 
   updateSpeed(0,speed1);
   updateSpeed(1,speed2);
   updateRpm(0,rpm1);
   updateRpm(1,rpm2);
-  updateTurbo(0,turbo);
-  updateTurbo(1,turbo);
+  updateThrust(0,thrust);
+  updateThrust(1,thrust);
+  updatePosition(1,pos1);
+  updatePosition(0,pos2);
+  updateGear(0,gear);
+  updateGear(1,gear);
 
-}, 100);
-*/
+}, 30);
 
 
-//updateTurbo(player<NUM>,value<NUM>);
-//updatePosition(player<NUM>,value<NUM>);
+
 //updateGear(player<NUM>,value<NUM>);
 //updateLap(player<NUM>,value<NUM>); //way to get lap length?
 //updatePhysics(player<NUM>,values<OBJECT?>);

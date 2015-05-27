@@ -92,7 +92,7 @@ PLAYER 1 GAUGE STYLES
   }
 
 
-#p1turbo {
+#p1thrust {
   top: 500px;
   left: 100px;
   font-size: 20px;
@@ -148,7 +148,7 @@ PLAYER 2 GAUGE STYLES
   }
 
 
-#p2turbo {
+#p2thrust {
   top: 500px;
   left: 100px;
   font-size: 20px;
