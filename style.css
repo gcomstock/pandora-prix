@@ -43,6 +43,7 @@ body {
   background-size: 150%;
   background-position: bottom center;
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 body, html {
