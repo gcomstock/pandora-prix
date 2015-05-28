@@ -10,7 +10,7 @@ document.addEventListener("keydown", function(e) {
 }, false);
 
 function fadeIntro() {
-  $('#start').append('<div id="outro"></div>');
+  $('#start').append('<div id="outro"><div class="boom"></div><div class="boom2"></div></div>');
 
   setTimeout(function(){
     $('#start').fadeOut();

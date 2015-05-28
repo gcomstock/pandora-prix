@@ -92,8 +92,6 @@ body, html {
     35%  {opacity: 0;}
     42%  {opacity: 0;}
     43%  {opacity: 1;}
-
-
 }
 
 #start:after {
@@ -119,6 +117,27 @@ body, html {
   z-index: 1000;
   background-image: url(start.png);
   -webkit-animation: example 100ms infinite;
+}
+
+.boom {
+  position: absolute;
+  top: -100px;
+  left: 300px;
+  width: 800px;
+  height: 800px;
+  background-image: url(boom.gif);
+  -webkit-animation: example2 200ms 7;
+}
+
+.boom2 {
+  position: absolute;
+  top: 0;
+  left: 1200px;
+  width: 600px;
+  height: 600px;
+  background-size: 100%;
+  background-image: url(boom.gif);
+  -webkit-animation: example2 500ms 2;
 }
 
 
