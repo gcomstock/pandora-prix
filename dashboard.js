@@ -100,26 +100,36 @@ function update(data) {
 var crashPlayed = 1;
 var finishRacePlayed = 1;
 var topSpeedPlayed = 1;
+var timeout = 0;
 
 function playsound(soundType, data) {
+	if (timeout > data.Time) {
+		return;
+	}
 	if (soundType == TYPE_CRASH && crashPlayed == 1) {
 		crashPlayed++;
+		timeout = data.Time + 10000;
 		$("#crash-01")[0].play();
 	} else if (soundType == TYPE_CRASH && crashPlayed > 1 && data.Time / 30000 > crashPlayed) {
 		crashPlayed++;
+		timeout = data.Time + 10000;
 		$("#crash-02")[0].play();	
 	} else if (soundType == TYPE_START_RACE) {
+		timeout = data.Time + 10000;
 		$("#start-race-01")[0].play();
 		crashPlayed = 1;
 		finishRacePlayed = 1;
 		topSpeedPlayed = 1;
 	} else if (soundType == TYPE_SPEED && topSpeedPlayed == 1) {
+		timeout = data.Time + 10000;
 		topSpeedPlayed++;
 		$("#top-speed-01")[0].play();
 	} else if (soundType == TYPE_SPEED && topSpeedPlayed > 1 && data.Time / 40000 > topSpeedPlayed) {
+		timeout = data.Time + 10000;
 		topSpeedPlayed++;
 		$("#first-lap-01")[0].play();	
 	} else if (soundType == TYPE_FINISH_RACE && finishRacePlayed == 1) {
+		timeout = data.Time + 10000;
 		finishRacePlayed++;
 		$("#finish-first-01")[0].play();
 	}
