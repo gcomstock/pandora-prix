@@ -91,14 +91,13 @@ function update(data) {
 
 		if (data.Speed <= 5 && data.Time > 30000) {
 			playsound(TYPE_CRASH, data);
-		} else if (data.Speed >= 50 && data.Time > 30000) {
+		} else if (data.Speed >= 40 && data.Time > 30000) {
 			playsound(TYPE_SPEED, data);
 		}
 	}
 }
 
 var crashPlayed = 1;
-var startRacePlayed = 1;
 var finishRacePlayed = 1;
 var topSpeedPlayed = 1;
 
@@ -106,15 +105,20 @@ function playsound(soundType, data) {
 	if (soundType == TYPE_CRASH && crashPlayed == 1) {
 		crashPlayed++;
 		$("#crash-01")[0].play();
-	} else if (soundType == TYPE_CRASH && crashPlayed > 1 && data.Time / 45000 > crashPlayed) {
-		crashPlayed++
+	} else if (soundType == TYPE_CRASH && crashPlayed > 1 && data.Time / 30000 > crashPlayed) {
+		crashPlayed++;
 		$("#crash-02")[0].play();	
-	} else if (soundType == TYPE_START_RACE && startRacePlayed == 1) {
-		startRacePlayed++;
+	} else if (soundType == TYPE_START_RACE) {
 		$("#start-race-01")[0].play();
-	} else if (soundType == TYPE_SPEED && data.Time / 30000 > topSpeedPlayed) {
+		crashPlayed = 1;
+		finishRacePlayed = 1;
+		topSpeedPlayed = 1;
+	} else if (soundType == TYPE_SPEED && topSpeedPlayed == 1) {
 		topSpeedPlayed++;
 		$("#top-speed-01")[0].play();
+	} else if (soundType == TYPE_SPEED && topSpeedPlayed > 1 && data.Time / 40000 > topSpeedPlayed) {
+		topSpeedPlayed++;
+		$("#first-lap-01")[0].play();	
 	} else if (soundType == TYPE_FINISH_RACE && finishRacePlayed == 1) {
 		finishRacePlayed++;
 		$("#finish-first-01")[0].play();
