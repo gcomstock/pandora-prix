@@ -24,12 +24,12 @@
 
 @font-face {
     font-family: 'digital';
-    src: url('fonts/digital-7_italic-webfont.eot');
-    src: url('fonts/digital-7_italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/digital-7_italic-webfont.woff2') format('woff2'),
-         url('fonts/digital-7_italic-webfont.woff') format('woff'),
-         url('fonts/digital-7_italic-webfont.ttf') format('truetype'),
-         url('fonts/digital-7_italic-webfont.svg#digital-7_italicitalic') format('svg');
+    src: url('fonts/digital_dismay-webfont.eot');
+    src: url('fonts/digital_dismay-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/digital_dismay-webfont.woff2') format('woff2'),
+         url('fonts/digital_dismay-webfont.woff') format('woff'),
+         url('fonts/digital_dismay-webfont.ttf') format('truetype'),
+         url('fonts/digital_dismay-webfont.svg#digital_dismayregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -37,18 +37,39 @@
 body {
   background-color: #222;
   margin: 0;
-  padding: 2rem 0;
   font-size: 10px;
+  text-align: center;
+  background-image: url(bg.png);
+  background-size: 150%;
+  background-position: bottom center;
+  background-repeat: no-repeat;
 }
 
 body, html {
   height: 100%;
 }
 
+.logo {
+  background-image: url(logo.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 540px;
+  height: 240px;
+  position: absolute;
+  top: 20px;
+  left: 45%;
+  margin-left: -250px;
+}
+
 .timer {
-  margin: 0 auto;
+  position: absolute;
+  top: 300px;
+  left: 50%;
+  margin-left: -350px;
+  width: 600px;
+
   font-family: 'digital';
-  font-size: 5rem;
+  font-size: 6rem;
   color: #ff0000;
   text-align: center;
   text-shadow: 0 0 10px #ee0000;
@@ -56,9 +77,29 @@ body, html {
 
 
 #player1, #player2 {
-  position: relative;
-  display: inline-block;
-  width: 48%;
+  position: absolute;
+  top: 50%;
+  margin-top: -40em;
+}
+
+#player1 {
+  left: -50px;
+  width: 85em;
+  height: 85em;
+  font-size: 10px;
+  background-image: url(ui-p1.png);
+  background-size: 100%;
+  /*-webkit-transform: rotateY(30deg) rotateX(15deg);*/
+}
+
+#player2 {
+  right: -35px;
+  width: 85em;
+  height: 85em;
+  font-size: 10px;
+  background-image: url(ui-p2.png);
+  background-size: 100%;
+  /*-webkit-transform: rotateY(-30deg) rotateX(15deg); */
 }
 
 /*
@@ -67,17 +108,30 @@ PLAYER 1 GAUGE STYLES
 ------------------------------------------------
 */
 
-
-#p1speed {
-  top: 400px;
-  left: 100px;
-  width: 29em;
-  font-size: 20px;
+#p1position, #p2position {
+  top: 0.85em;
+  left: 1.25em;
+  width: 2.08em;
+  background-color: #666;
+  font-size: 80px;
 }
 
-#p1rpm {
-  top: 800px;
-  left: 100px;
+#p1speed, #p2speed {
+  top: 15em;
+  left: 5.2em;
+  width: 29em;
+  font-size: 20.5px;
+}
+
+#p1thrust, #p2thrust {
+  top: 19.5em;
+  left: 5.2em;
+  font-size: 20.5px;
+}
+
+#p1rpm, #p2rpm {
+  top: 43em;
+  left: 23em;
   width: 29em;
   font-size: 15px;
 }
@@ -91,37 +145,26 @@ PLAYER 1 GAUGE STYLES
     text-shadow: none;
   }
 
-
-#p1thrust {
-  top: 500px;
-  left: 100px;
-  font-size: 20px;
-}
-
-#p1fuel {
+#p1fuel, #p2fuel {
   top: 600px;
   left: 100px;
   font-size: 15px;
+  display: none;
+}
+
+#p1gear, #p2gear {
+  top: 56em;
+  left: 30em;
+  font-size: 13px;
 }
 
 
-#p1gear {
-  top: 900px;
-  left: 100px;
-  font-size: 20px;
-}
-
-#p1position {
-  top: 0;
-  left: 0;
-}
 
 
 /*
 ------------------------------------------------
 PLAYER 2 GAUGE STYLES
 ------------------------------------------------
-*/
 
 
 #p2speed {
@@ -169,10 +212,10 @@ PLAYER 2 GAUGE STYLES
 
 #p2position {
   top: 0;
-  left: 0;
+  left: 30rem;
 }
 
-
+*/
 
 /*
 ------------------------------------------------
@@ -206,13 +249,8 @@ SHARED GAUGE STYLES
   right: 1.7em;
 }
 
-#player1 .value {
-  text-shadow: 0.03em 0.03em 0 #000, 0.06em 0.06em 0 #f00;
-}
-
-#player2 .value {
-  text-shadow: 0.03em 0.03em 0 #000, 0.06em 0.06em 0 #4498ff;
-}
+#player1 .value { text-shadow: 0.03em 0.03em 0 #000, 0.06em 0.06em 0 #f00; }
+#player2 .value { text-shadow: 0.03em 0.03em 0 #000, 0.06em 0.06em 0 #4498ff; }
 
 .pPosition {
   position: absolute;
@@ -222,10 +260,15 @@ SHARED GAUGE STYLES
   z-index: 10;
 }
 
+.position {
+  position: absolute;
+  right: 1.2em;
+}
+
 .posLabel {
   position: absolute;
   top: 0.55em;
-  right: -2em;
+  right: 0.4em;
   font-size: 0.5em;
 }
 
@@ -238,12 +281,15 @@ SHARED GAUGE STYLES
 }
 
 
-
 /*
 ------------------------------------------------
 RADIAL GAUGE
 ------------------------------------------------
 */
+
+  .pRPM .label {
+    left: 2.5em;
+  }
 
   .radial .gauge {
     position: absolute;
@@ -273,8 +319,7 @@ LINEAR GAUGE
   .linear .gauge {
     position: absolute;
     bottom: 2em;
-    left: 7em;
-    /* position set by js based off of bar height */
+    left: 7.5em;
   }
 
     .linear .gauge .bar {
@@ -283,7 +328,7 @@ LINEAR GAUGE
     }
 
       .linear .gauge .bar .fill {
-        background-color: #f00;
+        background-color: #666;
         width: 100%;
         height: 100%;
       }
@@ -299,8 +344,7 @@ GEAR GAUGE
   .gear .gauge {
     position: absolute;
     bottom: 2em;
-    left: 7em;
-    /* position set by js based off of bar height */
+    left: 6.5em;
   }
 
     .gear .gauge .bar {
@@ -311,7 +355,7 @@ GEAR GAUGE
       .gear .gauge .bar .fill {
         display: table-cell;
         vertical-align: middle;
-        background-color: #f00;
+        background-color: #666;
         width: 100%;
         height: 100%;
         font-family: 'ethnocentricregular';

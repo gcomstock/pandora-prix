@@ -47,9 +47,7 @@ var colors = [
 
 $(function() {
 
-
 //PLAYER 1 GAUGES
-
   drawRadialGauge({
     selector : '#p1speed',
     label : 'speed',
@@ -70,9 +68,9 @@ $(function() {
 
   drawLinearGauge({
     selector : '#p1thrust',
-    label : 'thrust',
-    gaugeLength : 17,
-    barWidth : 1.03, //em
+    label : 'boost',
+    gaugeLength : 16,
+    barWidth : 1, //em
     barHeight : 2, //em
     barSpacing : 0.25
   });
@@ -89,14 +87,13 @@ $(function() {
   drawGearGauge({
     selector : '#p1gear',
     label : 'gear',
-    gaugeLength : 6,
+    gaugeLength : 8,
     barWidth : 2.4, //em
     barHeight : 2, //em
     barSpacing : 0.25
   });
 
 //PLAYER 2 GAUGES
-
   drawRadialGauge({
     selector : '#p2speed',
     label : 'speed',
@@ -117,9 +114,9 @@ $(function() {
 
   drawLinearGauge({
     selector : '#p2thrust',
-    label : 'thrust',
-    gaugeLength : 17,
-    barWidth : 1.03, //em
+    label : 'boost',
+    gaugeLength : 16,
+    barWidth : 1, //em
     barHeight : 2, //em
     barSpacing : 0.25
   });
@@ -136,7 +133,7 @@ $(function() {
   drawGearGauge({
     selector : '#p2gear',
     label : 'gear',
-    gaugeLength : 6,
+    gaugeLength : 8,
     barWidth : 2.4, //em
     barHeight : 2, //em
     barSpacing : 0.25
@@ -154,7 +151,6 @@ $(function() {
   $("#start-race-02")[0].play();
   $("#top-speed-01")[0].play();
   */
-
 
 });
 
@@ -186,7 +182,6 @@ function drawRadialGauge(stats) {
       'height' : fillHeight+'em'
     });
 
-
   };
 
 }
@@ -197,8 +192,6 @@ function drawLinearGauge(stats) {
   var $label = $(stats.selector+' .label');
 
   $label.html(stats.label);
-
-  //$label.html('<div class="text">'+stats.label+'</div><div class="outline">'+stats.label+'</div>');
 
   for (var i = 1; i < stats.gaugeLength+1; i++) {
 
@@ -217,10 +210,6 @@ function drawLinearGauge(stats) {
       'left' : barSpacing*i-barSpacing+'em' //subtract one width from start
     });
 
-    // $gauge.find('.bar'+i+' .fill').css({
-    //   'height' : fillHeight+'em'
-    // });
-
   };
 
 }
@@ -234,7 +223,16 @@ function drawGearGauge(stats) {
 
   for (var i = 1; i < stats.gaugeLength+1; i++) {
 
-    var x = '<div class="bar"><div class="fill">'+i+'</div></div>';
+    if (i == 1) {
+      var x = '<div class="bar"><div class="fill">r</div></div>';
+    }
+    else if (i == 2) {
+      var x = '<div class="bar"><div class="fill">n</div></div>';
+    }
+    else {
+      var x = '<div class="bar"><div class="fill">'+(i-2)+'</div></div>';
+    }
+
 
     $gauge.append(x);
 
@@ -333,7 +331,6 @@ function updatePosition(player, value) {
   }
 
 }
-
 
 function updateGear(player, value) {
 
