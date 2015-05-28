@@ -335,12 +335,12 @@ function updatePosition(player, value) {
 
 }
 
-function updateLap(player, value) {
+function updateLap(player, current, total) {
 
   var $el = $('.pLap').eq(player);
 
-  $el.children('.currentLap').text(value);
-
+  $el.children('.currentLap').text(current);
+  $el.children('.totalLaps').text(total);
 
 }
 
@@ -358,7 +358,3 @@ function updateGear(player, value) {
 
 }
 
-
-//updateGear(player<NUM>,value<NUM>);
-//updateLap(player<NUM>,value<NUM>); //way to get lap length?
-//updatePhysics(player<NUM>,values<OBJECT?>);
