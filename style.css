@@ -160,7 +160,6 @@ GAUGE POSITIONING + SIZING
   text-align: center;
   font-size: 50px;
   font-family: 'ethnocentricitalic';
-
   color: white;
   z-index: 1000;
 }
@@ -194,6 +193,29 @@ GAUGE POSITIONING + SIZING
   }
 
 
+
+.pBrake {
+  position: absolute;
+  bottom: 4em;
+  right: 22em;
+  width: 7em;
+  height: 6.2em;
+  background-image: url(brake.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.pBrake:before {
+  content: 'brake';
+  font-family: 'ethnocentricitalic';
+  color: white;
+  position: absolute;
+  left: -6em;
+  top: 50%;
+  margin-top: -0.5em;
+  letter-spacing: 0.05em;
+  font-size: 1.5em;
+}
 
 /*
 ------------------------------------------------

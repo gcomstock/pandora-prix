@@ -39,7 +39,7 @@ var colors = [
   },
   {
     primary   : '#4498ff',
-    secondary : '#8245ff'
+    secondary : '#ffd300'
   },
 ];
 
@@ -138,19 +138,6 @@ $(function() {
     barHeight : 2, //em
     barSpacing : 0.25
   });
-
-  // PLAY SOUND CLIPS
-  /*
-  $("#crash-01")[0].play();
-  $("#crash-02")[0].play();
-  $("#finish-first-01")[0].play();
-  $("#finish-first-02")[0].play();
-  $("#first-lap-01")[0].play();
-  $("#first-lap-02")[0].play();
-  $("#start-race-01")[0].play();
-  $("#start-race-02")[0].play();
-  $("#top-speed-01")[0].play();
-  */
 
 });
 
@@ -373,5 +360,25 @@ function updateGear(player, value) {
     'backgroundColor': colors[player].secondary
   });
 
+}
+
+function updateBrake(player, value) {
+  var $el = $('.pBrake').eq(player);
+
+  if (value == 1 && player == 0) {
+    $el.css({
+      'backgroundImage' : 'url(brake-active-p1.png)'
+    });
+  }
+  else if (value == 1 && player == 1) {
+    $el.css({
+      'backgroundImage' : 'url(brake-active-p2.png)'
+    });
+  }
+  else {
+    $el.css({
+      'backgroundImage' : 'url(brake.png)'
+    });
+  }
 }
 
