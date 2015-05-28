@@ -8,6 +8,7 @@ import tornado.web
 import tornado.websocket
 from threading import Thread
 import Queue
+import time
 
 websockets = []
 insimQueue = Queue.Queue()
@@ -16,6 +17,7 @@ outGaugePacket2 = ""
 outSimPacket1 = ""
 outSimPacket2 = ""
 running = True
+insim = None
 
 class RacingWebSocket(tornado.websocket.WebSocketHandler):
 
@@ -27,6 +29,7 @@ class RacingWebSocket(tornado.websocket.WebSocketHandler):
 
         if (not insimQueue.empty()):
             self.write_message(insimQueue.get(False))
+
 
     def check_origin(self, origin):
         return True 
@@ -60,15 +63,12 @@ app = tornado.web.Application([(r'/racing', RacingWebSocket)])
 app.listen(8080)
 
 def outgauge_init():
+    global insim
     while (running):
         insim = pyinsim.insim('192.168.1.10', 29999, Admin='')
         insim.bind(pyinsim.EVT_ALL, all)
         outsim = pyinsim.outsim('0.0.0.0', 10000, outsim_packet, 2.0)
         outgauge = pyinsim.outgauge('0.0.0.0', 10001, outgauge_packet, 2.0)
-
-        # These two "send" commands should be sent every second if possible (in it's own thread?)
-        insim.send(pyinsim.ISP_TINY, ReqI=255, SubT=pyinsim.TINY_SST)
-        insim.send(pyinsim.ISP_TINY, ReqI=255, SubT=pyinsim.TINY_NLP)
 
         pyinsim.run()
         print "Connection Closed, Retrying"
@@ -76,11 +76,23 @@ def outgauge_init():
 def tornado_init():
     tornado.ioloop.IOLoop.instance().start()
 
+def lap_init():
+    global insim
+    while(running):
+        try:
+            time.sleep(1)
+            insim.send(pyinsim.ISP_TINY, ReqI=255, SubT=pyinsim.TINY_SST)
+            insim.send(pyinsim.ISP_TINY, ReqI=255, SubT=pyinsim.TINY_NLP)
+        except:
+            pass
+
 outgauge_thread = Thread(target = outgauge_init)
 tornado_thread = Thread(target = tornado_init)
+lap_thread = Thread(target = lap_init)
 
 outgauge_thread.start()
 tornado_thread.start()
+lap_thread.start()
 
 def signal_handler(signal, frame):
         global running

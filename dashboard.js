@@ -1,6 +1,11 @@
-
 var TYPE_INFO = 5;
 var TYPE_NODE_LAP = 37;
+var TYPE_NEW_CONNECTION = 18;
+var TYPE_NEW_PLAYER = 21;
+var TYPE_START_RACE = 17;
+var TYPE_FINISH_RACE = 34;
+var TYPE_CRASH = 101;
+var TYPE_SPEED = 102;
 
 var websocketInterval = null;
 var gaugeInterval = null;
@@ -55,6 +60,7 @@ function update(data) {
 				}
 			}
 		}
+		playsound(type, data)
 	}
 	if (data['RPM']) {
 		// gauge packet
@@ -80,6 +86,35 @@ function update(data) {
 		//updateTurbo(id-1, ??);	// data.Turbo seems to go from -1.0 to +1.75
 		//updateFuel(id-1, ??);		// data.Fuel is from 0.0 - 1.0, usually starts at 0.5
 
+		if (data.Speed <= 5 && data.Time > 30000) {
+			playsound(TYPE_CRASH, data);
+		} else if (data.Speed >= 50 && data.Time > 30000) {
+			playsound(TYPE_SPEED, data);
+		}
+	}
+}
+
+var crashPlayed = 1;
+var startRacePlayed = 1;
+var finishRacePlayed = 1;
+var topSpeedPlayed = 1;
+
+function playsound(soundType, data) {
+	if (soundType == TYPE_CRASH && crashPlayed == 1) {
+		crashPlayed++;
+		$("#crash-01")[0].play();
+	} else if (soundType == TYPE_CRASH && crashPlayed > 1 && data.Time / 45000 > crashPlayed) {
+		crashPlayed++
+		$("#crash-02")[0].play();	
+	} else if (soundType == TYPE_START_RACE && startRacePlayed == 1) {
+		startRacePlayed++;
+		$("#start-race-01")[0].play();
+	} else if (soundType == TYPE_SPEED && data.Time / 30000 > topSpeedPlayed) {
+		topSpeedPlayed++;
+		$("#top-speed-01")[0].play();
+	} else if (soundType == TYPE_FINISH_RACE && finishRacePlayed == 1) {
+		finishRacePlayed++;
+		$("#finish-first-01")[0].play();
 	}
 }
 
