@@ -30,7 +30,7 @@ function toggleFullScreen() {
 }
 
 
-var inactiveColor = '#666';
+var inactiveColor = '#444';
 
 var colors = [
   {
@@ -179,7 +179,8 @@ function drawRadialGauge(stats) {
     });
 
     $gauge.find('.bar .fill').eq(i-1).css({
-      'height' : fillHeight+'em'
+      'height' : fillHeight+'em',
+      'backgroundColor' : inactiveColor
     });
 
   };
@@ -207,7 +208,8 @@ function drawLinearGauge(stats) {
     $gauge.find('.bar').eq(i-1).css({
       'height' : barHeight+'em',
       'width' : barWidth+'em',
-      'left' : barSpacing*i-barSpacing+'em' //subtract one width from start
+      'left' : barSpacing*i-barSpacing+'em', //subtract one width from start
+      'backgroundColor' : inactiveColor
     });
 
   };
@@ -243,7 +245,8 @@ function drawGearGauge(stats) {
     $gauge.find('.bar').eq(i-1).css({
       'height' : barHeight+'em',
       'width' : barWidth+'em',
-      'left' : barSpacing*i-barSpacing+'em' //subtract one width from start
+      'left' : barSpacing*i-barSpacing+'em', //subtract one width from start
+      'backgroundColor' : inactiveColor
     });
 
   };
@@ -329,6 +332,15 @@ function updatePosition(player, value) {
   else {
     $el.children('.posLabel').text('nd');
   }
+
+}
+
+function updateLap(player, value) {
+
+  var $el = $('.pLap').eq(player);
+
+  $el.children('.currentLap').text(value);
+
 
 }
 
