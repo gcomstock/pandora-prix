@@ -82,6 +82,7 @@ function update(data) {
 		// data.Gear: 0 = R, 1 = N, 2 = 1st gear, 3 = 2nd gear, etc.
 		updateGear(id-1, data.Gear-1);
 		updateThrust(id-1, Math.floor(data.Throttle * 100));
+		updateBrake(id-1, data.Brake);
 
 		//updateTurbo(id-1, ??);	// data.Turbo seems to go from -1.0 to +1.75
 		//updateFuel(id-1, ??);		// data.Fuel is from 0.0 - 1.0, usually starts at 0.5
