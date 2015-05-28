@@ -2,7 +2,20 @@ document.addEventListener("keydown", function(e) {
   if (e.keyCode == 13) {
     toggleFullScreen();
   }
+
+  if (e.keyCode == 32) {
+    fadeIntro();
+  }
+
 }, false);
+
+function fadeIntro() {
+  $('#start').append('<div id="outro"><div class="boom"></div><div class="boom2"></div></div>');
+
+  setTimeout(function(){
+    $('#start').fadeOut();
+  }, 2500);
+}
 
 function toggleFullScreen() {
   if (!document.fullscreenElement &&
