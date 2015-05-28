@@ -12,6 +12,7 @@ document.addEventListener("keydown", function(e) {
 function fadeIntro() {
   $('#start').append('<div id="outro"><div class="boom"></div><div class="boom2"></div></div>');
 
+  $('#boom')[0].play();
   setTimeout(function(){
     $('#start').fadeOut();
   }, 2500);
