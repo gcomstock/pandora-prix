@@ -22,10 +22,18 @@ insim = None
 class RacingWebSocket(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
+	global outGaugePacket1
+	global outGaugePacket2
+	global outSimPacket1
+	global outSimPacket2
         self.write_message(outGaugePacket1)
+	outGaugePacket1 = ""
         self.write_message(outGaugePacket2)
+	outGaugePacket2 = ""
         self.write_message(outSimPacket1)
+	outSimPacket1 = ""
         self.write_message(outSimPacket2)
+	outSimPacket2 = ""
 
         if (not insimQueue.empty()):
             self.write_message(insimQueue.get(False))
