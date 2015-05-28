@@ -57,7 +57,7 @@ function update(data) {
 				if (plidMap[plid] != null) {
 					console.log("id:", plidMap[plid], ", lap:", (lap + "/" + gRaceLaps), ", pos:", pos);
 					updatePosition(plidMap[plid]-1, pos);
-					// TODO: update lap info
+					updateLap(plidMap[plid]-1, lap, gRaceLaps);
 				}
 			}
 		}
@@ -76,11 +76,13 @@ function update(data) {
 			rpm = String(rpm) + ".0";
 		}
 		
-		$(".timer").text(convertTime(data.Time));	// updateTimer?
+		if (id == 1) {
+			$(".timer").text(convertTime(data.Time));	// updateTimer?
+		}
 		updateRpm(id-1, rpm);
 		updateSpeed(id-1, Math.floor(data.Speed * 2.2));
 		// data.Gear: 0 = R, 1 = N, 2 = 1st gear, 3 = 2nd gear, etc.
-		updateGear(id-1, data.Gear-1);
+		updateGear(id-1, data.Gear+1);
 		updateThrust(id-1, Math.floor(data.Throttle * 100));
 		updateBrake(id-1, data.Brake);
 
