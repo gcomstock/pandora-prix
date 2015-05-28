@@ -302,8 +302,10 @@ function updateSpeed(player,value) {
 
 function updateThrust(player, value) {
 
+  var value = value+1;
+
   var $el = $('.pThrust').eq(player);
-  var maxValue = $el.data('max');
+  var maxValue = 2.75; //$el.data('max');
   var $bars = $el.find('.bar .fill');
 
   $bars.css({
@@ -313,9 +315,24 @@ function updateThrust(player, value) {
   var fullBars = Math.round( value / maxValue*$bars.length );
 
   for (var i = 0; i < fullBars; i++) {
-    $bars.eq(i).css({
-      'backgroundColor': colors[player].secondary
-    });
+
+    if (i < 5) {
+      $bars.eq(i).css({
+        'backgroundColor': '#f00'
+      });
+    }
+    else if (i >= 5 && i < 10) {
+      $bars.eq(i).css({
+        'backgroundColor': '#ffe600'
+      });
+    }
+    else {
+      $bars.eq(i).css({
+        'backgroundColor': '#72e600'
+      });
+    }
+
+
   };
 
 }
