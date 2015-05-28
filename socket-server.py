@@ -65,6 +65,8 @@ def outgauge_init():
         insim.bind(pyinsim.EVT_ALL, all)
         outsim = pyinsim.outsim('0.0.0.0', 10000, outsim_packet, 2.0)
         outgauge = pyinsim.outgauge('0.0.0.0', 10001, outgauge_packet, 2.0)
+        insim.send(pyinsim.ISP_TINY, ReqI=255, SubT=pyinsim.TINY_SST)
+        insim.send(pyinsim.ISP_TINY, ReqI=255, SubT=pyinsim.TINY_NLP)
         pyinsim.run()
         print "Connection Closed, Retrying"
 
